@@ -1,0 +1,19 @@
+%% Script_06_MPMGeneration                                         
+% Specify inputs                                            
+path_som = ''; % specify path to output of Script_03_ClusterMPPMatrix_with_SOM ending with '_ContributionNode.csv'
+path_save_proxsize = ''; % specify path to output of Script_05_Proximity_Size_Calculation (path_save_proxsize) containing the string "MCU_Proximity_Size"
+perplexity = []; % Often 3, try what looks best for you for the tSNE projection of the Multiplexed Protein Map. e.g. 3
+std_display_limit_edges = []; % Threshold for displaying the SPS edges between nodes in MPM e.g. 2.5
+scaling_factor_edges = []; % Scales the thicknes of the edges in the MPM, e.g. 20
+scaling_factor_nodes = []; % Scales the diameter of the nodes in the MPM, e.g. 10000
+list_stains = arrayfun(@(x) sprintf('%02d',x),[1:(size(mpp_matrix,2))], 'UniformOutput',false); % this will generate as list of strings starting from Stain01, finishing with StainN, where N is the number of 4i channels measured.
+% list_stains = {'Type in 4iChannel 01' 'Type in 4iChannel 02' 'Type in 4iChannel N' 'etc' ''Type in 4iChannel last''}; Alternatively, type in 4i  channels manually.
+
+% run plot_MPM_and_MCULoadings function, to siplay MPM and MCU intensity loadings
+[map_prox_coordinates, mcu_mean_int_zs] = plot_MPM_and_MCULoadings( path_som,...
+                                                                    path_save_proxsize,...
+                                                                    perplexity,...
+                                                                    std_display_limit_edges,...
+                                                                    scaling_factor_edges,...
+                                                                    scaling_factor_nodes,...
+                                                                    list_stains);
